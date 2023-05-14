@@ -1,0 +1,39 @@
+module Ripple_Carry_Adder_nBit
+    #(parameter n = 4)(
+        input [n-1:0] x,y,
+        input c_in,
+        input Add_Sub,
+        
+        
+        output [n-1:0] Result,
+        output C_out,
+        output Over_Flow,
+        output Zero,
+        output Sign
+    );
+    
+    
+    wire [n : 0] c;
+    wire [n-1:0] Tx;
+
+    assign c[0] = Add_Sub? 1'b1:c_in;
+    
+    assign C_out = c[n];
+    assign Over_Flow = c[n] ^ c[n-1];
+    assign Zero = ~|Result;
+    assign Sign = Result[n-1];
+    
+    genvar i;
+    generate
+        for(i=0; i<n; i=i+1) begin : stage
+            assign Tx[i] = x[i] ^ Add_Sub;
+            Full_Adder M (
+                    .x(Tx[i]), 
+                    .y(y[i]), 
+                    .c_in(c[i]),
+                    .c(c[i+1]), 
+                    .s(Result[i])
+            );
+        end
+    endgenerate
+endmodule
