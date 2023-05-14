@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 module Ripple_Carry_Adder_nBit
     #(parameter n = 4)(
         input [n-1:0] x,y,
