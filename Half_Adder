@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 module Half_Adder(
     input x, y,
     output c,  s
