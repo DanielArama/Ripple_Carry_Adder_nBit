@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 module Full_Adder(
     input x, y, c_in,
     output c, s
