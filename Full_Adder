@@ -1,0 +1,23 @@
+module Full_Adder(
+    input x, y, c_in,
+    output c, s
+    );
+    
+    wire T1, T2, T3;
+    
+    Half_Adder M0(
+        .x(x),
+        .y(y), 
+        .c(T1),
+        .s(T2)
+        );
+        
+    Half_Adder M1(
+        .x(T2),
+        .y(c_in), 
+        .c(T3),
+        .s(s)
+        );
+        
+        assign c = T3 | T1 ;
+endmodule
