@@ -1,0 +1,67 @@
+`timescale 1ns / 1ps
+
+module TB_Ripple_Carry_adder_nBit(
+
+    );
+    
+    parameter n =4;
+    
+    parameter k =15;
+    integer i, j, p ;
+    
+    reg [n-1 : 0 ] x, y;
+    reg c_in;
+    reg Add_Sub;
+    
+    
+    wire C_out,Over_Flow,Zero,Sign;
+    wire [ n-1 : 0] sum;
+
+    
+ Ripple_Carry_Adder_nBit #(.n(n)) uunt(
+        .x(x),
+        .y(y),
+        .c_in(c_in),
+        .Add_Sub(Add_Sub),
+        
+        .C_out(C_out),
+        .sum(sum),
+        .Over_Flow(Over_Flow),
+        .Zero(Zero),
+        .Sign(Sign)
+    );
+    
+
+    
+    initial begin
+        
+        
+      for ( p = 0; p < 3; p = p + 1) begin
+
+          case (p)
+            0: begin
+              Add_Sub = 1'b0;
+              c_in = 1'b0; 
+            end
+            1: begin
+              Add_Sub = 1'b0;
+              c_in = 1'b1; 
+            end
+            2: begin
+              Add_Sub = 1'b1; 
+              c_in = 1'b0;  
+            end
+          endcase
+            
+        for ( i = 0; i <= k; i = i + 1) begin
+            for ( j = 0; j <= k; j = j + 1) begin
+                x = i;
+                y = j;             
+                #1;
+                $display("x = %, y = %b, sum = %b, C_out = %b", x, y, sum, C_out);
+            end
+        end
+     end
+        $finish;
+    end  
+endmodule
