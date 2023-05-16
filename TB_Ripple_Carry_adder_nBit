@@ -1,4 +1,24 @@
 `timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 
+// Design Name: 
+// Module Name: TB_Ripple_Carry_adder_nBit
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
 
 module TB_Ripple_Carry_adder_nBit(
 
@@ -14,8 +34,8 @@ module TB_Ripple_Carry_adder_nBit(
     reg Add_Sub;
     
     
-    wire C_out,Over_Flow,Zero,Sign;
-    wire [ n-1 : 0] sum;
+    wire C_out,Over_Flow, Zero, Sign;
+    wire [ n-1 : 0] Result;
 
     
  Ripple_Carry_Adder_nBit #(.n(n)) uunt(
@@ -25,7 +45,7 @@ module TB_Ripple_Carry_adder_nBit(
         .Add_Sub(Add_Sub),
         
         .C_out(C_out),
-        .sum(sum),
+        .Result(Result),
         .Over_Flow(Over_Flow),
         .Zero(Zero),
         .Sign(Sign)
@@ -58,7 +78,7 @@ module TB_Ripple_Carry_adder_nBit(
                 x = i;
                 y = j;             
                 #1;
-                $display("x = %, y = %b, sum = %b, C_out = %b", x, y, sum, C_out);
+                $display("x = %, y = %b, Result = %b, C_out = %b", x, y, Result, C_out);
             end
         end
      end
